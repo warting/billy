@@ -44,10 +44,8 @@ jobs:
             build-cache
           key: gradle-${{ hashFiles('checksum.txt') }}
 
-      # change to closeAndReleaseSonatypeStagingRepository once confident about the release
-      # add all the secrets to github!
       - name: Publish application
-        run: ./gradlew publishToSonatype closeSonatypeStagingRepository
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
