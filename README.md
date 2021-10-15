@@ -51,7 +51,8 @@ dependencies {
 All you need to do is to call collect the state of an Sku and then call `buy()` when it is ready:
 
 ```
-val earlyBirdProductStatus by Sku.Subscription("early_bird").statusFlow.collectAsState(
+val earlyBirdProduct = Sku.Subscription("early_bird")
+val earlyBirdProductStatus by earlyBirdProduct.statusFlow.collectAsState(
     initial = SkuStatus.Loading(earlyBirdProduct)
 )
 
