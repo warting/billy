@@ -25,6 +25,10 @@ plugins {
     id("com.gladed.androidgitversion") version "0.4.14"
 }
 
+apiValidation {
+    ignoredProjects.add("app")
+}
+
 androidGitVersion {
     tagPattern = "^v[0-9]+.*"
 }
