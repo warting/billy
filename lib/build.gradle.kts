@@ -75,7 +75,7 @@ dependencies {
     // To use the Java-compatible @Experimental API annotation
     implementation("androidx.annotation:annotation-experimental:1.1.0")
 
-    val lifecycle_version = "2.4.0-rc01"
+    val lifecycle_version = "2.4.0"
 
     implementation("androidx.lifecycle:lifecycle-process:$lifecycle_version")
 
