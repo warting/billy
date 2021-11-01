@@ -10,3 +10,4 @@ build
 local.properties
 secrets.properties
 build-cache
+*.sarif
