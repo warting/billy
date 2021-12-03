@@ -9,7 +9,7 @@ plugins {
 val customApplicationId: String =
     gradleLocalProperties(rootDir).getProperty("APPLICATION_ID", "se.warting.sample")
 
-val composeVersion = "1.0.5"
+val composeVersion = "1.1.0-beta04"
 
 android {
     compileSdk = 31
