@@ -70,9 +70,9 @@ afterEvaluate {
                     }
 
                     scm {
-                        connection = 'scm:git@github.com:wartiong/perfect-android-library-template.git'
-                        developerConnection = 'scm:git:ssh://github.com/wartiong/perfect-android-library-template.git'
-                        url = 'https://github.com/warting/perfect-android-library-template/tree/main'
+                        connection = 'scm:git@github.com:warting/billy.git'
+                        developerConnection = 'scm:git:ssh://github.com/warting/billy.git'
+                        url = 'https://github.com/warting/billy/tree/main'
                     }
                 }
             }
