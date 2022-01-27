@@ -45,15 +45,15 @@ android {
     }
 
     lint {
-        baseline(file("lint-baseline.xml"))
-        isCheckReleaseBuilds = true
-        isCheckAllWarnings = true
-        isWarningsAsErrors = true
-        isAbortOnError = true
+        baseline = file("lint-baseline.xml")
+        checkReleaseBuilds = true
+        checkAllWarnings = true
+        warningsAsErrors = true
+        abortOnError = true
         disable.add("LintBaseline")
         disable.add("GradleDependency")
-        isCheckDependencies = true
-        isCheckGeneratedSources = false
+        checkDependencies = true
+        checkGeneratedSources = false
         sarifOutput = file("../lint-results-app.sarif")
     }
 }
@@ -84,7 +84,7 @@ dependencies {
     // val coroutineVersion = "1.5.2"
     // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutineVersion")
 
-    // implementation("androidx.core:core-ktx:1.6.0")
+    // implementation("androidx.core:core-ktx:1.6.10")
     // implementation("androidx.appcompat:appcompat:1.3.1")
     // implementation("com.google.android.material:material:1.4.0")
     testImplementation("junit:junit:4.13.2")
