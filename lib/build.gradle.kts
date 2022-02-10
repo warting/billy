@@ -73,7 +73,7 @@ dependencies {
 
     implementation("androidx.annotation:annotation:1.3.0")
 
-    val lifecycle_version = "2.4.0"
+    val lifecycle_version = "2.4.1"
 
     implementation("androidx.lifecycle:lifecycle-process:$lifecycle_version")
 
