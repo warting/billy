@@ -72,7 +72,7 @@ android {
 
 dependencies {
     implementation(project(":lib"))
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
     implementation("androidx.core:core-ktx:1.7.0")
