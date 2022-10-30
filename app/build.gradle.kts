@@ -12,12 +12,12 @@ val customApplicationId: String =
 val composeVersion = "1.2.0-beta02"
 
 android {
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
         applicationId = customApplicationId
         minSdk = 21
-        targetSdk = 31
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

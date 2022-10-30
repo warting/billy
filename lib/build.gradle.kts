@@ -14,11 +14,10 @@ val PUBLISH_ARTIFACT_ID by extra("flow")
 apply(from = "${rootProject.projectDir}/gradle/publish-module.gradle")
 
 android {
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
