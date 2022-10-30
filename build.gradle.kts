@@ -4,6 +4,10 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 buildscript {
 
     repositories {
+        maven {
+            // until broken gradle plugin portal is fixed
+            url = uri("https://premex.jfrog.io/artifactory/local-gradle-plugins/")
+        }
         google()
         mavenCentral()
     }
