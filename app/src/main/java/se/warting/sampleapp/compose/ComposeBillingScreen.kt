@@ -32,11 +32,11 @@ fun ComposeBillingScreen() {
 
         Text(earlyBirdProduct.name)
 
-        when (@Suppress("UnnecessaryVariable") val earlyBirdProduct = earlyBirdProductStatus) {
+        when (@Suppress("UnnecessaryVariable") val status = earlyBirdProductStatus) {
             is SkuStatus.Available -> {
                 Text("Available!")
                 Button(onClick = {
-                    earlyBirdProduct.buy()
+                    status.buy()
                 }) {
                     Text(text = "buy")
                 }
