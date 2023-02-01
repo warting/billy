@@ -12,7 +12,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
+        classpath("com.android.tools.build:gradle:7.4.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.22.0")
         classpath("com.google.gms:google-services:4.3.15")
