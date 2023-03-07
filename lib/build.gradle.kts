@@ -55,6 +55,7 @@ android {
         checkGeneratedSources = false
         sarifOutput = file("../lint-results-app.sarif")
     }
+    namespace = "se.warting.billy.flow"
 }
 
 kotlin {

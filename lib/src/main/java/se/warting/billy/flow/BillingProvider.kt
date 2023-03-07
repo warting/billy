@@ -8,7 +8,6 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import se.warting.billy.flow.internal.AndroidActivityProvider
 import se.warting.billy.flow.internal.AndroidPurchaseLauncher
 import se.warting.billy.flow.internal.AndroidPurchasesObserver
@@ -21,7 +20,7 @@ import se.warting.billy.flow.internal.AndroidPurchasesUpdatedListener
  * @see PurchaseLauncher
  * @see PurchaseObserver
  */
-class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructor(
+class BillingProvider constructor(
     val billingClient: BillingClient,
     private val purchaseLauncher: PurchaseLauncher,
     val observer: PurchaseObserver,
@@ -56,7 +55,6 @@ class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructor(
         /**
          * Init method that allows to provide custom parameters for testing purposes.
          */
-        @OptIn(ExperimentalCoroutinesApi::class)
         fun init(
             context: Context
         ): BillingProvider {

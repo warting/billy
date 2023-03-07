@@ -50,7 +50,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
 
     lint {
@@ -65,6 +65,7 @@ android {
         checkGeneratedSources = false
         sarifOutput = file("../lint-results-lib.sarif")
     }
+    namespace = "se.warting.sampleapp"
 }
 
 
