@@ -3,7 +3,7 @@ plugins {
     id("kotlin-android")
     id("maven-publish")
     id("signing")
-    id("org.jetbrains.dokka") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 
@@ -55,6 +55,7 @@ android {
         checkGeneratedSources = false
         sarifOutput = file("../lint-results-app.sarif")
     }
+    namespace = "se.warting.billy.flow"
 }
 
 kotlin {

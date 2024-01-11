@@ -7,25 +7,25 @@ import com.android.billingclient.api.querySkuDetails
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-sealed class Sku {
+public sealed class Sku {
 
-    abstract val name: String
-    abstract val skuType: String
+    public abstract val name: String
+    public abstract val skuType: String
 
-    class Subscription(override val name: String) : Sku() {
+    public class Subscription(override val name: String) : Sku() {
         override val skuType: String
             get() = BillingClient.SkuType.SUBS
     }
 
-    class InAppProduct(override val name: String) : Sku() {
+    public class InAppProduct(override val name: String) : Sku() {
         override val skuType: String
             get() = BillingClient.SkuType.INAPP
     }
 
-    val statusFlow: Flow<SkuStatus>
+    public val statusFlow: Flow<SkuStatus>
         get() = BillingProvider.instance.getStatusFlow(this)
 
-    val detailsFlow: Flow<List<SkuDetails>>
+    public val detailsFlow: Flow<List<SkuDetails>>
         get() = flow {
             val skuList = ArrayList<String>()
             skuList.add(name)

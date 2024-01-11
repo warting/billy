@@ -21,22 +21,22 @@ import se.warting.billy.flow.internal.AndroidPurchasesUpdatedListener
  * @see PurchaseLauncher
  * @see PurchaseObserver
  */
-class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructor(
-    val billingClient: BillingClient,
+public class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructor(
+    public val billingClient: BillingClient,
     private val purchaseLauncher: PurchaseLauncher,
-    val observer: PurchaseObserver,
+    public val observer: PurchaseObserver,
 ) : PurchaseObserver by observer {
 
-    fun buy(billingFlowParams: BillingFlowParams): BillingResult? {
+    public fun buy(billingFlowParams: BillingFlowParams): BillingResult? {
         return purchaseLauncher.buy(billingFlowParams)
     }
 
-    companion object {
+    public companion object {
 
         private var _instance: BillingProvider? = null
 
         @JvmStatic
-        val instance: BillingProvider
+        public val instance: BillingProvider
             get() = checkNotNull(_instance) {
                 "BilliungProvider was not initialized. If you have disabled auto-init ensure you" +
                         " are calling init(context) before using it."
@@ -51,13 +51,13 @@ class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructor(
          * Provide an easy way to check if BilliungProvider instance is already
          * initialized, before calling BilliungProvider.init(context).
          */
-        fun isInitialized() = _instance != null
+        public fun isInitialized():Boolean = _instance != null
 
         /**
          * Init method that allows to provide custom parameters for testing purposes.
          */
         @OptIn(ExperimentalCoroutinesApi::class)
-        fun init(
+        public fun init(
             context: Context
         ): BillingProvider {
 
