@@ -10,12 +10,12 @@ val customApplicationId: String =
     gradleLocalProperties(rootDir).getProperty("APPLICATION_ID", "se.warting.sample")
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = customApplicationId
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

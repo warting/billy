@@ -14,7 +14,7 @@ val PUBLISH_ARTIFACT_ID by extra("flow")
 apply(from = "${rootProject.projectDir}/gradle/publish-module.gradle")
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
