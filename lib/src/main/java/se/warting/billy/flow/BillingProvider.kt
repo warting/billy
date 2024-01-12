@@ -51,7 +51,7 @@ public class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructo
          * Provide an easy way to check if BilliungProvider instance is already
          * initialized, before calling BilliungProvider.init(context).
          */
-        public fun isInitialized():Boolean = _instance != null
+        public fun isInitialized(): Boolean = _instance != null
 
         /**
          * Init method that allows to provide custom parameters for testing purposes.

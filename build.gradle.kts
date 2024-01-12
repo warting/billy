@@ -1,4 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import io.gitlab.arturbosch.detekt.Detekt
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
@@ -14,7 +15,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:8.2.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.0")
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.4")
         classpath("com.google.gms:google-services:4.3.15")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,7 +24,7 @@ buildscript {
 
 plugins {
     id("com.github.ben-manes.versions") version "0.47.0"
-    id("io.gitlab.arturbosch.detekt") version "1.23.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.3"
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
     id("com.gladed.androidgitversion") version "0.4.14"
@@ -47,7 +48,7 @@ allprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
     dependencies {
-        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.0")
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.4")
     }
 
     detekt {
@@ -64,11 +65,17 @@ allprojects {
 detekt {
     autoCorrect = true
     buildUponDefaultConfig = true
-    config = files("$projectDir/config/detekt/detekt.yml")
+    config.setFrom(files("$projectDir/config/detekt/detekt.yml"))
     baseline = file("$projectDir/config/detekt/baseline.xml")
+}
 
+tasks.withType<Detekt>().configureEach {
     reports {
-        html.enabled = true
+        html.required.set(true)
+        xml.required.set(false)
+        txt.required.set(false)
+        sarif.required.set(false)
+        md.required.set(false)
     }
 }
 
