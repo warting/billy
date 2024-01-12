@@ -1,0 +1,109 @@
+public final class se/warting/billy/flow/BillingInitializer : androidx/startup/Initializer {
+	public fun <init> ()V
+	public synthetic fun create (Landroid/content/Context;)Ljava/lang/Object;
+	public fun create (Landroid/content/Context;)Lse/warting/billy/flow/BillingProvider;
+	public fun dependencies ()Ljava/util/List;
+}
+
+public final class se/warting/billy/flow/BillingProvider : se/warting/billy/flow/PurchaseObserver {
+	public static final field Companion Lse/warting/billy/flow/BillingProvider$Companion;
+	public fun <init> (Lcom/android/billingclient/api/BillingClient;Lse/warting/billy/flow/PurchaseLauncher;Lse/warting/billy/flow/PurchaseObserver;)V
+	public final fun buy (Lcom/android/billingclient/api/BillingFlowParams;)Lcom/android/billingclient/api/BillingResult;
+	public fun connected (Z)V
+	public fun getActiveSubscriptions ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getBillingClient ()Lcom/android/billingclient/api/BillingClient;
+	public static final fun getInstance ()Lse/warting/billy/flow/BillingProvider;
+	public final fun getObserver ()Lse/warting/billy/flow/PurchaseObserver;
+	public fun getStatusFlow (Lse/warting/billy/flow/Product;)Lkotlinx/coroutines/flow/Flow;
+	public fun refreshStatus ()V
+}
+
+public final class se/warting/billy/flow/BillingProvider$Companion {
+	public final fun getInstance ()Lse/warting/billy/flow/BillingProvider;
+	public final fun init (Landroid/content/Context;)Lse/warting/billy/flow/BillingProvider;
+	public final fun isInitialized ()Z
+}
+
+public abstract class se/warting/billy/flow/Product {
+	public final fun getDetailsFlow ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun getProductType ()Ljava/lang/String;
+	public final fun getStatusFlow ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class se/warting/billy/flow/Product$InAppProduct : se/warting/billy/flow/Product {
+	public fun <init> (Ljava/lang/String;)V
+	public fun getName ()Ljava/lang/String;
+	public fun getProductType ()Ljava/lang/String;
+}
+
+public final class se/warting/billy/flow/Product$Subscription : se/warting/billy/flow/Product {
+	public fun <init> (Ljava/lang/String;)V
+	public fun getName ()Ljava/lang/String;
+	public fun getProductType ()Ljava/lang/String;
+}
+
+public abstract class se/warting/billy/flow/ProductStatus {
+	public abstract fun getType ()Lse/warting/billy/flow/Product;
+}
+
+public final class se/warting/billy/flow/ProductStatus$Available : se/warting/billy/flow/ProductStatus {
+	public fun <init> (Lse/warting/billy/flow/Product;Lcom/android/billingclient/api/ProductDetails;)V
+	public final fun buy (Lcom/android/billingclient/api/ProductDetails$SubscriptionOfferDetails;)V
+	public final fun component1 ()Lse/warting/billy/flow/Product;
+	public final fun component2 ()Lcom/android/billingclient/api/ProductDetails;
+	public final fun copy (Lse/warting/billy/flow/Product;Lcom/android/billingclient/api/ProductDetails;)Lse/warting/billy/flow/ProductStatus$Available;
+	public static synthetic fun copy$default (Lse/warting/billy/flow/ProductStatus$Available;Lse/warting/billy/flow/Product;Lcom/android/billingclient/api/ProductDetails;ILjava/lang/Object;)Lse/warting/billy/flow/ProductStatus$Available;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProductDetails ()Lcom/android/billingclient/api/ProductDetails;
+	public fun getType ()Lse/warting/billy/flow/Product;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class se/warting/billy/flow/ProductStatus$Loading : se/warting/billy/flow/ProductStatus {
+	public fun <init> (Lse/warting/billy/flow/Product;)V
+	public final fun component1 ()Lse/warting/billy/flow/Product;
+	public final fun copy (Lse/warting/billy/flow/Product;)Lse/warting/billy/flow/ProductStatus$Loading;
+	public static synthetic fun copy$default (Lse/warting/billy/flow/ProductStatus$Loading;Lse/warting/billy/flow/Product;ILjava/lang/Object;)Lse/warting/billy/flow/ProductStatus$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getType ()Lse/warting/billy/flow/Product;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class se/warting/billy/flow/ProductStatus$Owned : se/warting/billy/flow/ProductStatus {
+	public fun <init> (Lse/warting/billy/flow/Product;Ljava/util/List;)V
+	public final fun component1 ()Lse/warting/billy/flow/Product;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Lse/warting/billy/flow/Product;Ljava/util/List;)Lse/warting/billy/flow/ProductStatus$Owned;
+	public static synthetic fun copy$default (Lse/warting/billy/flow/ProductStatus$Owned;Lse/warting/billy/flow/Product;Ljava/util/List;ILjava/lang/Object;)Lse/warting/billy/flow/ProductStatus$Owned;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPurchase ()Ljava/util/List;
+	public fun getType ()Lse/warting/billy/flow/Product;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class se/warting/billy/flow/ProductStatus$Unavailable : se/warting/billy/flow/ProductStatus {
+	public fun <init> (Lse/warting/billy/flow/Product;)V
+	public final fun component1 ()Lse/warting/billy/flow/Product;
+	public final fun copy (Lse/warting/billy/flow/Product;)Lse/warting/billy/flow/ProductStatus$Unavailable;
+	public static synthetic fun copy$default (Lse/warting/billy/flow/ProductStatus$Unavailable;Lse/warting/billy/flow/Product;ILjava/lang/Object;)Lse/warting/billy/flow/ProductStatus$Unavailable;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getType ()Lse/warting/billy/flow/Product;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class se/warting/billy/flow/PurchaseLauncher {
+	public abstract fun buy (Lcom/android/billingclient/api/BillingFlowParams;)Lcom/android/billingclient/api/BillingResult;
+}
+
+public abstract interface class se/warting/billy/flow/PurchaseObserver {
+	public abstract fun connected (Z)V
+	public abstract fun getActiveSubscriptions ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getStatusFlow (Lse/warting/billy/flow/Product;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun refreshStatus ()V
+}
+

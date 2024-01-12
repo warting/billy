@@ -6,19 +6,20 @@ import androidx.lifecycle.Lifecycle.Event.ON_RESUME
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchaseHistoryRecord
 import com.android.billingclient.api.PurchaseHistoryResponseListener
 import com.android.billingclient.api.PurchasesResponseListener
-import com.android.billingclient.api.SkuDetails
-import com.android.billingclient.api.SkuDetailsParams
+import com.android.billingclient.api.QueryPurchaseHistoryParams
+import com.android.billingclient.api.QueryPurchasesParams
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import se.warting.billy.flow.PurchaseObserver
-import se.warting.billy.flow.Sku
-import se.warting.billy.flow.SkuStatus
+import se.warting.billy.flow.Product
+import se.warting.billy.flow.ProductStatus
 
 internal data class CombinedPurchaseData(
     val itemPurchases: List<Purchase>,
@@ -59,15 +60,13 @@ internal class AndroidPurchasesObserver(
             )
         }
 
-    override fun getStatusFlow(sku: Sku): Flow<SkuStatus> {
-        return combine(getCombinedPurchasesFlow(), sku.detailsFlow) { alles, skuDetailsList ->
+    override fun getStatusFlow(product: Product): Flow<ProductStatus> {
+        return combine(getCombinedPurchasesFlow(), product.detailsFlow) { alles, skuDetailsList ->
             val skuList = ArrayList<String>()
-            skuList.add(sku.name)
-            val params = SkuDetailsParams.newBuilder()
-            params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
+            skuList.add(product.name)
 
             skuStatusResolver(
-                sku,
+                product,
                 skuDetailsList,
                 alles.purchases
             )
@@ -75,21 +74,21 @@ internal class AndroidPurchasesObserver(
     }
 
     private fun skuStatusResolver(
-        sku: Sku,
-        skuDetailsList: List<SkuDetails>,
+        product: Product,
+        skuDetailsList: List<ProductDetails>,
         ownedItemsList: List<Purchase>,
-    ): SkuStatus {
+    ): ProductStatus {
 
-        val ownedItem = ownedItemsList.filter { it.skus.contains(sku.name) }
+        val ownedItem = ownedItemsList.filter { it.skus.contains(product.name) }
         if (ownedItem.isNotEmpty()) {
-            return SkuStatus.Owned(sku, ownedItem)
+            return ProductStatus.Owned(product, ownedItem)
         }
 
-        val skuDetails: SkuDetails? = skuDetailsList.firstOrNull { it.sku == sku.name }
+        val skuDetails: ProductDetails? = skuDetailsList.firstOrNull { it.productId == product.name }
         return if (skuDetails != null) {
-            SkuStatus.Available(sku, skuDetails)
+            ProductStatus.Available(product, skuDetails)
         } else {
-            SkuStatus.Unavailable(sku)
+            ProductStatus.Unavailable(product)
         }
     }
 
@@ -131,13 +130,34 @@ internal class AndroidPurchasesObserver(
 
     override fun refreshStatus() {
         if (isConnected) {
-            billingClient.queryPurchaseHistoryAsync(BillingClient.SkuType.SUBS, subHistoryObserver)
+
+            val queryPurchaseHistorySubsParams = QueryPurchaseHistoryParams.newBuilder()
+                .setProductType(BillingClient.ProductType.SUBS)
+                .build()
+
+            val queryPurchaseHistoryInAppParams = QueryPurchaseHistoryParams.newBuilder()
+                .setProductType(BillingClient.ProductType.INAPP)
+                .build()
+
             billingClient.queryPurchaseHistoryAsync(
-                BillingClient.SkuType.INAPP,
+                queryPurchaseHistorySubsParams,
+                subHistoryObserver
+            )
+            billingClient.queryPurchaseHistoryAsync(
+                queryPurchaseHistoryInAppParams,
                 inappHistoryObserver
             )
-            billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS, subsPurchasesObserver)
-            billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, inAppPurchasesObserver)
+
+            val queryPurchasesSubsParams = QueryPurchasesParams.newBuilder()
+                .setProductType(BillingClient.ProductType.SUBS)
+                .build()
+
+            val queryPurchasesInAppParams = QueryPurchasesParams.newBuilder()
+                .setProductType(BillingClient.ProductType.INAPP)
+                .build()
+
+            billingClient.queryPurchasesAsync(queryPurchasesSubsParams, subsPurchasesObserver)
+            billingClient.queryPurchasesAsync(queryPurchasesInAppParams, inAppPurchasesObserver)
         }
     }
 

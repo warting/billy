@@ -13,7 +13,7 @@ public interface PurchaseObserver {
      */
     public fun getActiveSubscriptions(): Flow<List<Purchase>>
 
-    public fun getStatusFlow(sku: Sku): Flow<SkuStatus>
+    public fun getStatusFlow(product: Product): Flow<ProductStatus>
 
     /**
      * Request the observer to refresh the status of the purchases

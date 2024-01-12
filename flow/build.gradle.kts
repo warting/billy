@@ -1,17 +1,52 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("maven-publish")
-    id("signing")
     id("org.jetbrains.dokka") version "1.9.10"
+    id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
 
-val PUBLISH_GROUP_ID: String by extra("se.warting.billy")
+
+mavenPublishing {
+
+    publishToMavenCentral(SonatypeHost.DEFAULT)
+    signAllPublications()
+
+    pom {
+        name.set("Billy")
+        description.set("Billing flow")
+        inceptionYear.set("2021")
+        url.set("https://github.com/username/mylibrary/")
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("https://opensource.org/licenses/MIT")
+            }
+        }
+        developers {
+            developer {
+                id.set("warting")
+                name.set("Stefan Wärting")
+                url.set("https://github.com/warting/")
+            }
+        }
+        scm {
+            url.set("https://github.com/warting/billy/")
+            connection.set("scm:git:git://github.com/warting/billy.git")
+            developerConnection.set("scm:git:ssh://git@github.com/warting/billy.git")
+        }
+    }
+}
+
+val PUBLISH_GROUP_ID: String by extra(rootProject.group as String)
 val PUBLISH_VERSION: String by extra(rootProject.version as String)
 val PUBLISH_ARTIFACT_ID by extra("flow")
 
-apply(from = "${rootProject.projectDir}/gradle/publish-module.gradle")
+group = PUBLISH_GROUP_ID
+version = PUBLISH_VERSION
 
 android {
     compileSdk = 34
@@ -56,6 +91,15 @@ android {
         checkGeneratedSources = false
         sarifOutput = file("../lint-results-app.sarif")
     }
+
+    publishing {
+        multipleVariants {
+            allVariants()
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
     namespace = "se.warting.billy.flow"
 }
 

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import se.warting.billy.flow.Sku
-import se.warting.billy.flow.SkuStatus
+import se.warting.billy.flow.Product
+import se.warting.billy.flow.ProductStatus
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -14,7 +14,7 @@ class AdvanceViewModel : ViewModel() {
     private val viewData = MutableLiveData<AdvanceViewData>()
 
     init {
-        Sku.Subscription("early_bird").statusFlow.onEach {
+        Product.Subscription("early_bird").statusFlow.onEach {
             viewData.value =
                 viewData.value?.copy(
                     earlyBirdStatus = it,
@@ -28,5 +28,5 @@ class AdvanceViewModel : ViewModel() {
 }
 
 data class AdvanceViewData(
-    val earlyBirdStatus: SkuStatus = SkuStatus.Loading(Sku.Subscription("early_bird")),
+    val earlyBirdStatus: ProductStatus = ProductStatus.Loading(Product.Subscription("early_bird")),
 )

@@ -23,4 +23,4 @@ buildCache {
 //}
 rootProject.name = "Billing flow"
 include(":app")
-include(":lib")
+include(":flow")

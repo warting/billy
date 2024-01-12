@@ -43,6 +43,7 @@ val gitOrLocalVersion: String =
         .getProperty("VERSION_NAME", androidGitVersion.name().replace("v", ""))
 
 version = gitOrLocalVersion
+group = "se.warting.billy"
 
 allprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
@@ -91,10 +92,3 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
         isNonStable(candidate.version) && !isNonStable(currentVersion)
     }
 }
-
-
-task<Delete>("clean") {
-    delete(rootProject.buildDir)
-}
-
-apply(from = "${rootDir}/gradle/publish-root.gradle")
