@@ -10,12 +10,12 @@ val customApplicationId: String =
     gradleLocalProperties(rootDir).getProperty("APPLICATION_ID", "se.warting.sample")
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = customApplicationId
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -35,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
         freeCompilerArgs = listOfNotNull(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xskip-prerelease-check"
@@ -50,7 +50,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     lint {
@@ -61,10 +61,12 @@ android {
         abortOnError = true
         disable.add("LintBaseline")
         disable.add("GradleDependency")
+        disable.add("NewerVersionAvailable")
         checkDependencies = true
         checkGeneratedSources = false
         sarifOutput = file("../lint-results-lib.sarif")
     }
+    namespace = "se.warting.sampleapp"
 }
 
 

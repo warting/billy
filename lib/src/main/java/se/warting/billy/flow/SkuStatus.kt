@@ -7,19 +7,19 @@ import com.android.billingclient.api.SkuDetails
 /**
  * Defines the status of a given [Sku]
  */
-sealed class SkuStatus {
+public sealed class SkuStatus {
 
     /**
      * The given [Sku] from this status
      */
-    abstract val type: Sku
+    public abstract val type: Sku
 
-    data class Owned(override val type: Sku, val purchase: List<Purchase>) : SkuStatus()
+    public data class Owned(override val type: Sku, val purchase: List<Purchase>) : SkuStatus()
 
-    data class Loading(override val type: Sku) : SkuStatus()
+    public data class Loading(override val type: Sku) : SkuStatus()
 
-    data class Available(override val type: Sku, val skuDetails: SkuDetails) : SkuStatus() {
-        fun buy() {
+    public data class Available(override val type: Sku, val skuDetails: SkuDetails) : SkuStatus() {
+        public fun buy() {
             val flowParams = BillingFlowParams.newBuilder()
                 .setSkuDetails(skuDetails)
                 .build()
@@ -32,5 +32,5 @@ sealed class SkuStatus {
         }
     }
 
-    data class Unavailable(override val type: Sku) : SkuStatus()
+    public data class Unavailable(override val type: Sku) : SkuStatus()
 }

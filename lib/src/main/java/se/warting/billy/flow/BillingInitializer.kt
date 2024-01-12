@@ -11,7 +11,7 @@ import androidx.startup.Initializer
  * some custom initialization.
  */
 @Keep
-class BillingInitializer : Initializer<BillingProvider> {
+public class BillingInitializer : Initializer<BillingProvider> {
 
     override fun create(context: Context): BillingProvider {
         return BillingProvider.run {

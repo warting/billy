@@ -6,20 +6,20 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Observes purchase status changes
  */
-interface PurchaseObserver {
+public interface PurchaseObserver {
 
     /**
      * @return a flow with all purchases made
      */
-    fun getActiveSubscriptions(): Flow<List<Purchase>>
+    public fun getActiveSubscriptions(): Flow<List<Purchase>>
 
-    fun getStatusFlow(sku: Sku): Flow<SkuStatus>
+    public fun getStatusFlow(sku: Sku): Flow<SkuStatus>
 
     /**
      * Request the observer to refresh the status of the purchases
      *
      * Note: this is called on lifecycle changes
      */
-    fun refreshStatus()
-    fun connected(connected: Boolean)
+    public fun refreshStatus()
+    public fun connected(connected: Boolean)
 }

@@ -3,7 +3,7 @@ plugins {
     id("kotlin-android")
     id("maven-publish")
     id("signing")
-    id("org.jetbrains.dokka") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 
@@ -14,7 +14,7 @@ val PUBLISH_ARTIFACT_ID by extra("flow")
 apply(from = "${rootProject.projectDir}/gradle/publish-module.gradle")
 
 android {
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
@@ -27,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding = false
@@ -36,7 +36,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
         freeCompilerArgs = listOfNotNull(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xskip-prerelease-check"
@@ -51,10 +51,12 @@ android {
         abortOnError = true
         disable.add("LintBaseline")
         disable.add("GradleDependency")
+        disable.add("NewerVersionAvailable")
         checkDependencies = true
         checkGeneratedSources = false
         sarifOutput = file("../lint-results-app.sarif")
     }
+    namespace = "se.warting.billy.flow"
 }
 
 kotlin {
@@ -67,7 +69,7 @@ dependencies {
 
     api("androidx.startup:startup-runtime:1.1.1")
 
-    val billingVersion = "6.0.0"
+    val billingVersion = "6.0.1"
     api("com.android.billingclient:billing-ktx:$billingVersion")
 
     implementation("androidx.annotation:annotation:1.6.0")
