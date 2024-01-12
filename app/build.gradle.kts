@@ -75,8 +75,8 @@ dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2023.06.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
+    implementation(project(":flow"))
 
-    implementation(project(":lib"))
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
