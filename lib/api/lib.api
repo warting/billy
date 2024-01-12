@@ -24,13 +24,6 @@ public final class se/warting/billy/flow/BillingProvider$Companion {
 	public final fun isInitialized ()Z
 }
 
-public final class se/warting/billy/flow/BuildConfig {
-	public static final field BUILD_TYPE Ljava/lang/String;
-	public static final field DEBUG Z
-	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
-	public fun <init> ()V
-}
-
 public abstract interface class se/warting/billy/flow/PurchaseLauncher {
 	public abstract fun buy (Lcom/android/billingclient/api/BillingFlowParams;)Lcom/android/billingclient/api/BillingResult;
 }
