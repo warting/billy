@@ -76,6 +76,14 @@ when (val earlyBirdProduct = earlyBirdProductStatus) {
 For a full implementation
 see: [Full sample](app/src/main/java/se/warting/sampleapp/compose/ComposeBillingScreen.kt)
 
+## Test your apps products
+If you want to load your own products in the sample app you can do so by adding your apps package
+name to local.properties file like this:
+
+```
+APPLICATION_ID=your.app.id
+```
+
 ## Notes
 
 There is no need to initiate the BillingClient we are doing it for you! see: [BillingInitializer](lib/src/main/java/se/warting/billy/flow/BillingInitializer.kt)
