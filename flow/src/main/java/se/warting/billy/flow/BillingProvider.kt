@@ -21,7 +21,7 @@ import se.warting.billy.flow.internal.AndroidPurchasesUpdatedListener
  * @see PurchaseLauncher
  * @see PurchaseObserver
  */
-public class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructor(
+public class BillingProvider constructor(
     public val billingClient: BillingClient,
     private val purchaseLauncher: PurchaseLauncher,
     public val observer: PurchaseObserver,
@@ -38,25 +38,24 @@ public class BillingProvider @OptIn(ExperimentalCoroutinesApi::class) constructo
         @JvmStatic
         public val instance: BillingProvider
             get() = checkNotNull(_instance) {
-                "BilliungProvider was not initialized. If you have disabled auto-init ensure you" +
+                "BillingProvider was not initialized. If you have disabled auto-init ensure you" +
                         " are calling init(context) before using it."
             }
 
         /**
-         * When BilliungProvider self-initialization is disabled, BilliungProvider.init(context)
-         * must be called to manually initialize the BilliungProvider instance. Depending on
+         * When BillingProvider self-initialization is disabled, BillingProvider.init(context)
+         * must be called to manually initialize the BillingProvider instance. Depending on
          * implementation if init() is called more than once (multiple times in app OR in app + test),
          * an IllegalStateException is thrown.
          *
-         * Provide an easy way to check if BilliungProvider instance is already
-         * initialized, before calling BilliungProvider.init(context).
+         * Provide an easy way to check if BillingProvider instance is already
+         * initialized, before calling BillingProvider.init(context).
          */
         public fun isInitialized(): Boolean = _instance != null
 
         /**
          * Init method that allows to provide custom parameters for testing purposes.
          */
-        @OptIn(ExperimentalCoroutinesApi::class)
         public fun init(
             context: Context
         ): BillingProvider {
