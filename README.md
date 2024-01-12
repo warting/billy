@@ -48,27 +48,27 @@ dependencies {
 
 ## How to use
 
-All you need to do is to call collect the state of an Sku and then call `buy()` when it is ready:
+All you need to do is to call collect the state of an Product and then call `buy()` when it is ready:
 
 ```
-val earlyBirdProduct = Sku.Subscription("early_bird")
+val earlyBirdProduct = Product.Subscription("early_bird")
 val earlyBirdProductStatus by earlyBirdProduct.statusFlow.collectAsState(
-    initial = SkuStatus.Loading(earlyBirdProduct)
+    initial = ProductStatus.Loading(earlyBirdProduct)
 )
 
 when (val earlyBirdProduct = earlyBirdProductStatus) {
-    is SkuStatus.Available -> {
+    is ProductStatus.Available -> {
         Text("Available to buy!")
         Button(onClick = {
             // Launch buy flow
-            earlyBirdProduct.buy()
+            earlyBirdProduct.buy(offer)
         }) {
             Text(text = "buy")
         }
     }
-    is SkuStatus.Loading -> Text("Loading....")
-    is SkuStatus.Unavailable -> Text("Unavailable")
-    is SkuStatus.Owned -> Text("Owned")
+    is ProductStatus.Loading -> Text("Loading....")
+    is ProductStatus.Unavailable -> Text("Unavailable")
+    is ProductStatus.Owned -> Text("Owned")
 }
 
 ```
