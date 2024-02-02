@@ -18,7 +18,7 @@ mavenPublishing {
         name.set("Billy")
         description.set("Billing flow")
         inceptionYear.set("2021")
-        url.set("https://github.com/username/mylibrary/")
+        url.set("https://github.com/warting/billy/")
         licenses {
             license {
                 name.set("MIT License")
