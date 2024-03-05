@@ -3,7 +3,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("org.jetbrains.dokka") version "1.9.10"
+    id("org.jetbrains.dokka") version "1.9.20"
     id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
