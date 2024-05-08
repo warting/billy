@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.2.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24")
         classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.6")
         classpath("com.google.gms:google-services:4.4.1")
         // NOTE: Do not place your application dependencies here; they belong
